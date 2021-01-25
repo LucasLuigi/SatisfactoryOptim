@@ -3,8 +3,11 @@ package com.lucasluigi.satisfactoryoptim.chainitems.productionchainitems;
 import com.lucasluigi.satisfactoryoptim.chainitems.ChainItem;
 
 public class ProductionChainItem extends ChainItem {
-    public Integer inputPerMinute;
-    public Integer outputPerMinute;
+
+    private static final long serialVersionUID = -5678910880719359218L;
+
+    protected Double maxInputPerMinute;
+    protected Double maxOutputPerMinute;
 
     @SuppressWarnings("unused")
     private ProductionChainItem() {
@@ -15,10 +18,12 @@ public class ProductionChainItem extends ChainItem {
      * 
      * @param outputPerMinute
      */
-    protected ProductionChainItem(Integer outputPerMinute) {
+    protected ProductionChainItem(Double maxOutputPerMinute) {
+        this.id = ChainItem.getANewValueForId();
+
         // FIXME To set correctly
-        this.inputPerMinute = outputPerMinute;
-        this.outputPerMinute = outputPerMinute;
+        this.maxInputPerMinute = maxOutputPerMinute;
+        this.maxOutputPerMinute = maxOutputPerMinute;
     }
 
     /**
@@ -27,21 +32,27 @@ public class ProductionChainItem extends ChainItem {
      * @param inputPerMinute
      * @param outputPerMinute
      */
-    protected ProductionChainItem(Integer inputPerMinute, Integer outputPerMinute) {
-        this.inputPerMinute = inputPerMinute;
-        this.outputPerMinute = outputPerMinute;
+    protected ProductionChainItem(Double maxInputPerMinute, Double maxOutputPerMinute) {
+        this.id = ChainItem.getANewValueForId();
+
+        this.maxInputPerMinute = maxInputPerMinute;
+        this.maxOutputPerMinute = maxOutputPerMinute;
     }
 
-    public Integer getInputPerMinute() {
-        return this.inputPerMinute;
+    public Double getMaxInputPerMinute() {
+        return this.maxInputPerMinute;
     }
 
-    public Integer getOutputPerMinute() {
-        return this.outputPerMinute;
+    public Double getMaxOutputPerMinute() {
+        return this.maxOutputPerMinute;
+    }
+
+    public ChainItem geInputChainItem() {
+        return inputChainItem;
     }
 
     public String toString() {
-        return "Prod:\n  inputPerMinute=" + this.inputPerMinute + "\n  outputPerMinute=" + this.outputPerMinute + "\n";
+        return "Prod#" + this.id + " - " + this.description + ":\n  maxInputPerMinute=" + this.maxInputPerMinute
+                + "\n  maxOutputPerMinute=" + this.maxOutputPerMinute + "\n";
     }
-
 }
